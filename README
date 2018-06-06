@@ -45,6 +45,8 @@ for reference to see how we've computed the various anomaly features.
 
 ----------------------
 DATA PROVIDED
+........................................
+_stats directories:
 
 The various directories whose names and in 'stats' contain anomaly feature
 measurements obtained from our 100,000 synfast simulations, and 1000 SMICA
@@ -66,7 +68,37 @@ range of realizaiton numbers in each file is in the filename.
 
 For memory considerations, the full cl and c(theta) measurements are not
 included, nor are the actual fits files for the
-maps, but these could  could be shared upon request. 
+maps, but these could  could be shared upon request.
+
+........................................
+COVMATS directory
+
+This directory contains the feature covariances measured from the data in the
+stats directories. In the covmats directory there are a number of files.
+
+- The files with the tags -0mean-nounits-unnorm are the covariance matrices.
+    > 0mean means the mean over realizations for each quantity is subtracted off
+      before computing covmat
+    > nounits means the data is divided by the standard deviation over
+      realizations for each quantity before computing covmat
+    > unnorm just means that the numpy.cov function is used to compute the
+      covariance matrix, rather than numpy.corrcoef. (Though, since the data are
+      preprocessed by subtracting the mean and dividing by the standard
+      deviation before computing the covariances, the covariance and correlation
+      coefficients will actually be identical.)
+    > the suffix 'lcdm' means they were computed using our fiducial synfast sims
+    > the suffix 'ffp' means they were computed using the FFP8.1 sims
+    > the suffix 'lcdm+DQ' means they were computed with the synfast sims with
+       a doppler quadrupole contribution added
+
+- covmat-samplevar_lcdm_N01000-r00000-99999.dat - contains the sample variance
+    of the covariance measured from 1000 sample realizations of the synfast
+    (lcdm) sims. The 100 subsampled covmats used to compute this are in the
+    directory lcdmcov_N1000_subsample. (Versions with +DQ mean Doppler
+    quadrupole has been added)
+
+- covmat-eigendata_lcdm/ffp.dat - contains eigenvalues of corresponding
+   covariance matrix in first row, eigen vectors (so PCs) below that. 
 
 ----------------------
 Feel free to contact me if you have questions about the data or code in this directory!
