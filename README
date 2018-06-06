@@ -1,0 +1,77 @@
+This repository contains data and code used in the analysis presented in
+Muir, Adhikari, and Huterer 2018, "The Covariance of CMB anomalies."
+
+Note that the directory structure and data presented here is arranged for
+transparancy, and is NOT in the format that the code was actually run.
+Because of that, the code will not work out of the box if you clone the
+repository. Rather, it is provided for reference and transparancy.
+
+----------------------
+PYTHON SCRIPT
+
+The script measure_anomalystats.py does most of the calculation. 
+The general outline of this file is:
+- utility functions for handling healpix maps (downgrading maps & masks, 
+    filename handling, 2pt function measurement, map simulation using synfast, etc)
+- functions for measuring features associated with anomalies
+- functions for obtaining & handling feature meas. from many realizations
+- functions for plotting 1d hists and 2d triangle scatter
+- functions for measuring covariance matrix and doing PCA analysis
+- the main() function, which has code 
+
+----------------------
+ANALYSIS PROCEDURE
+
+The anomaly covariance analysis used this code as follows:
+- The main() function in measure_anomalystats.py (at the bottom of this file)
+  was used to generate &   analyze simulated maps to get anomaly measurements
+  for all desired realizations. There's   a hack there, where bool switches
+  "if 0:" or "if 1" are used to manually turn off and on parts of the
+  calculation (if e.g. only one part needs to be rerun).
+  -> The workhorse function used by that script is run_manystats which,
+     given a list of stat names  calls the necessary functions to compute
+     them for all realizations, and handles file-naming.
+- Once the stat data is generated, a jupyter notebook (not included in this
+  repo) was used to  analyze data and do plotting. It imports this python
+  file as a module, and so uses  some of the covariance calculation and
+  plotting functions. 
+
+Again: The script is set up to expect specific filename structures, and
+expects folders to be in a specific arrangement (as they are on 
+my [Jessie's] computer). Because of this, it won't work  as a 
+self-contained script, but the functions defined in it could be useful,
+either if it is imported as a module in another pythons script, or simply 
+for reference to see how we've computed the various anomaly features. 
+
+----------------------
+DATA PROVIDED
+
+The various directories whose names and in 'stats' contain anomaly feature
+measurements obtained from our 100,000 synfast simulations, and 1000 SMICA
+separated FFP8.1 maps provided on the Planck Legacy Archive.
+
+In the directory names:
+- lcdm means synfast simulations (described in paper)
+- lcdm+DQ are the same set of synfast simulations, with a dopper quadrupole
+   added according to Table 3 of Copi et al arXiv:1311.4562
+- smicaffp means the SMICA separated FFP8.1 sims, downgraded to NSIDE=64
+- fullsky means that the analysis is done with pseudo-cl measurements of the full sky
+- UT78 means that the UT78 mask was used, downgraded to NSIDE=64
+
+In each directory, the data for each stat appear in text files, which have
+the realization number in the first column, and the stat measurement in the
+second column. They are split into several smaller files (due to how I handled
+multiprocessing when creating them); the numbers in each filename show the
+range of realizaiton numbers in each file is in the filename. 
+
+The smicaffp_2pt dir contains cl and c(theta) measurements from the FFP maps.
+For memory considerations, the same measurements for the synfast simulations
+are not included in this repository, nor are the actual fits files for the
+maps, but these could  could be shared upon request. 
+
+----------------------
+Feel free to contact me if you have questions about the data or code in this directory!
+
+Script maintained by Jessie Muir (jlmuir@umich.edu or jlynnmuir@gmail.com).
+Docstring last updated June 6, 2018.
+
