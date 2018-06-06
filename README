@@ -64,9 +64,8 @@ second column. They are split into several smaller files (due to how I handled
 multiprocessing when creating them); the numbers in each filename show the
 range of realizaiton numbers in each file is in the filename. 
 
-The smicaffp_2pt dir contains cl and c(theta) measurements from the FFP maps.
-For memory considerations, the same measurements for the synfast simulations
-are not included in this repository, nor are the actual fits files for the
+For memory considerations, the full cl and c(theta) measurements are not
+included, nor are the actual fits files for the
 maps, but these could  could be shared upon request. 
 
 ----------------------
