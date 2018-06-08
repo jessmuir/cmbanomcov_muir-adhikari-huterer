@@ -4,7 +4,7 @@ Muir, Adhikari, and Huterer 2018, "The Covariance of CMB anomalies."
 Note that the directory structure and data presented here is arranged for
 transparancy, and is NOT in the format that the code was actually run.
 Because of that, the code will not work out of the box if you clone the
-repository. Rather, it is provided for reference and transparancy.
+repository. Rather, it is provided as a reference.
 
 ----------------------
 PYTHON SCRIPT
@@ -17,7 +17,7 @@ The general outline of this file is:
 - functions for obtaining & handling feature meas. from many realizations
 - functions for plotting 1d hists and 2d triangle scatter
 - functions for measuring covariance matrix and doing PCA analysis
-- the main() function, which has code 
+- the main() function, which has calls to functions for generating data used in analysis. 
 
 ----------------------
 ANALYSIS PROCEDURE
